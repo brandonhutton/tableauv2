@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Tableau Extensions API Library -->
+  <!-- Ensure the library path is correct as per your directory structure -->
+  <script src="../../lib/tableau.extensions.1.latest.js"></script>
+</head>
+<body>
+  <div>
+    <h1>Hello Extensions!</h1>
+    <p id="resultBox" class="lead">Not Initialized</p>
+    <button id="initializeButton" onclick="initialize()" class="btn btn-primary">Initialize Extensions API</button>
+  </div>
+
+  <script>
+    function initialize() {
+      tableau.extensions.initializeAsync().then(function () {
+        // Initialization succeeded! Get the dashboard
+        var dashboard = tableau.extensions.dashboardContent.dashboard;
+        document.getElementById("resultBox").innerHTML = "I'm running in a dashboard named <strong>" + dashboard.name + "</strong>";
+      }, function (err) {
+        // something went wrong in initialization
+        document.getElementById("resultBox").innerHTML = "Error while Initializing: " + err.toString();
+      });
+    }
+  </script>
+</body>
+</html>
